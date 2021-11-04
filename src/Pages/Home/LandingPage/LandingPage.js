@@ -26,7 +26,7 @@ const LandingPage = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={6} style={{
-                    background: 'linear-gradient(to right,#0000 200px,#3A4256 10px)',
+                    background: 'linear-gradient(to right,#0000 220px,#3A4256 10px)',
                     height: '100vh',
                     textAlign: 'start',
                     display: 'flex',
