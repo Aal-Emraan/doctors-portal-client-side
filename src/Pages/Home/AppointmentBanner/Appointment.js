@@ -15,10 +15,10 @@ const Appointment = () => {
     return (
         <Box style={appointmentBg} sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
-                <Grid item xs={6} md={5}>
+                <Grid item xs={12} md={5}>
                     <img src={doctor} alt="" style={{width: '100%',marginTop: '-130px'}}/>
                 </Grid>
-                <Grid item xs={6} md={7} style={{color: 'white', marginTop: 100, textAlign: 'start'}}>
+                <Grid item xs={12} md={7} style={{color: 'white', marginTop: 100, textAlign: 'start'}}>
                     <Typography variant="h6" color="info.main">
                         Appointment
                     </Typography>
