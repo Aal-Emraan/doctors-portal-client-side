@@ -1,4 +1,4 @@
-import { Fade, Modal, Typography } from '@mui/material';
+import { Button, Fade, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
@@ -17,7 +17,13 @@ const style = {
     p: 4,
   };
 
-const BookingModal = ({open, handleClose, name, time}) => {
+const BookingModal = ({open, handleClose, name, time, date}) => {
+
+    const handleSubmit = e => {
+        alert('submittin')
+        handleClose();
+        e.preventDefault();
+    }
     return (
         <Modal
         aria-labelledby="transition-modal-title"
@@ -35,13 +41,42 @@ const BookingModal = ({open, handleClose, name, time}) => {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               {name}
             </Typography>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <TextField
                 disabled
+                sx={{width: '90%', m:1}}
                 id="outlined-size-small"
                 defaultValue={time}
                 size="small"
                 />
+                <TextField
+                sx={{width: '90%', m:1}}
+                id="outlined-size-small"
+                placeholder="your name"
+                size="small"
+                />
+                <TextField
+                sx={{width: '90%', m:1}}
+                id="outlined-size-small"
+                type="email"
+                placeholder="your email"
+                size="small"
+                />
+                <TextField
+                sx={{width: '90%', m:1}}
+                id="outlined-size-small"
+                type="number"
+                placeholder="your phone number"
+                size="small"
+                />
+                <TextField
+                disabled
+                sx={{width: '90%', m:1}}
+                id="outlined-size-small"
+                defaultValue={date.toDateString()}
+                size="small"
+                />
+                <Button type="submit" variant="contained">Submit</Button>
             </form>
           </Box>
         </Fade>

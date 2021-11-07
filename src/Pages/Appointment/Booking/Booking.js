@@ -3,7 +3,7 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import BookingModal from '../BookingModal/BookingModal';
 
-const Booking = ({booking}) => {
+const Booking = ({booking, date}) => {
     const {name, time, space} = booking;
     
   const [open, setOpen] = React.useState(false);
@@ -23,7 +23,7 @@ const Booking = ({booking}) => {
                     {space} Spaces Available
                 </Typography>
                 <Button variant="outlined" onClick={handleOpen}>Book Appointment</Button>
-                <BookingModal open={open} handleClose={handleClose} name={name} time={time}></BookingModal>
+                <BookingModal open={open} date={date} handleClose={handleClose} name={name} time={time}></BookingModal>
             </Paper>
         </Grid>
     );
