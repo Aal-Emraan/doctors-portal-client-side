@@ -23,7 +23,7 @@ const Booking = ({booking}) => {
                     {space} Spaces Available
                 </Typography>
                 <Button variant="outlined" onClick={handleOpen}>Book Appointment</Button>
-                <BookingModal open={open} handleClose={handleClose}></BookingModal>
+                <BookingModal open={open} handleClose={handleClose} name={name} time={time}></BookingModal>
             </Paper>
         </Grid>
     );

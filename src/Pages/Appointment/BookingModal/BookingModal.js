@@ -16,7 +16,7 @@ const style = {
     p: 4,
   };
 
-const BookingModal = ({open, handleClose}) => {
+const BookingModal = ({open, handleClose, name, time}) => {
     return (
         <Modal
         aria-labelledby="transition-modal-title"
@@ -32,10 +32,10 @@ const BookingModal = ({open, handleClose}) => {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              Text in a modal
+              {name}
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+              {time}
             </Typography>
           </Box>
         </Fade>
