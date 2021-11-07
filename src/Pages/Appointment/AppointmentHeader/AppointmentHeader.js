@@ -3,12 +3,12 @@ import React from 'react';
 import chair from '../../../images/chair.png'
 import Calender from '../../Shared/Calender/Calender';
 
-const AppointmentHeader = () => {
+const AppointmentHeader = ({date, setDate}) => {
     return (
         <Container>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
-                    <Calender></Calender>
+                    <Calender date={date} setDate={setDate}></Calender>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <img style={{width: '100%'}} src={chair} alt="" />
