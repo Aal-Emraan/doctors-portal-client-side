@@ -2,6 +2,7 @@ import { Fade, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
+import TextField from '@mui/material/TextField';
 
 const style = {
     background: 'white',
@@ -34,9 +35,14 @@ const BookingModal = ({open, handleClose, name, time}) => {
             <Typography id="transition-modal-title" variant="h6" component="h2">
               {name}
             </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {time}
-            </Typography>
+            <form>
+                <TextField
+                disabled
+                id="outlined-size-small"
+                defaultValue={time}
+                size="small"
+                />
+            </form>
           </Box>
         </Fade>
       </Modal>
