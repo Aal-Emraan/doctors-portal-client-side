@@ -14,7 +14,15 @@ const SignUp = () => {
         setSignUpLoginInfo(newInfo);
     }
 
+    console.log(signUpInfo);
+
     const handleSubmit = e => {
+        if(signUpInfo.password !== signUpInfo.password2){
+            alert('password didnot match');
+            e.preventDefault();
+            return;
+        }
+        alert('Account Created Succesfully')
         e.preventDefault();
     }
     return (
@@ -26,14 +34,14 @@ const SignUp = () => {
                         <TextField
                         sx={{width: '70%', m:2}}
                         name="displayName"
-                        onBlur={handleOnChange}
+                        onChange={handleOnChange}
                         label="Name"
                         variant="standard" />
                         <TextField
                         sx={{width: '70%', m:2}}
                         type="email"
                         name="email"
-                        onBlur={handleOnChange}
+                        onChange={handleOnChange}
                         label="Email"
                         variant="standard" />
 
@@ -41,15 +49,23 @@ const SignUp = () => {
                         sx={{width: '70%', m:2}}
                         type="password"
                         name="password"
-                        onBlur={handleOnChange}
+                        onChange={handleOnChange}
                         label="Password"
+                        variant="standard" />
+
+                        <TextField
+                        sx={{width: '70%', m:2}}
+                        type="password"
+                        name="password2"
+                        onChange={handleOnChange}
+                        label="Re-enter your password"
                         variant="standard" />
 
                         <Button
                         sx={{width: '70%', mt:4}}
                         type="submit"
                         variant="contained">
-                            Login
+                            Sign Up
                         </Button>
 
                         <NavLink style={{textDecoration: 'none'}} to="/login">

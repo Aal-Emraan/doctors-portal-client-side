@@ -28,7 +28,7 @@ const Login = () => {
                         sx={{width: '70%', m:2}}
                         type="email"
                         name="email"
-                        onBlur={handleOnChange}
+                        onChange={handleOnChange}
                         label="Email"
                         variant="standard" />
 
@@ -36,7 +36,7 @@ const Login = () => {
                         sx={{width: '70%', m:2}}
                         type="password"
                         name="password"
-                        onBlur={handleOnChange}
+                        onChange={handleOnChange}
                         label="Password"
                         variant="standard" />
 
