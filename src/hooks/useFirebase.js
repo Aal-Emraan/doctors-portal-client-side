@@ -1,5 +1,5 @@
 // import initializeAuthentication from '../Pages/Firebase/firebase.init';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, onAuthStateChanged  } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, updateProfile   } from "firebase/auth";
 import { useEffect, useState } from 'react';
 import initializeAuthentication from "../Pages/Firebase/firebase.init";
 
@@ -13,25 +13,35 @@ const useFirebase = () => {
 
     const auth = getAuth();
 
-    const signInWithGoogle = () => {
+    const signInWithGoogle = (location, history) => {
         setIsLoading(true);
         const googleProvider = new GoogleAuthProvider();
         signInWithPopup(auth, googleProvider)
         .then((result) => {
-            setUser(result.user);
+            // setUser(result.user);
+            history.push(location?.state?.from)
         }).catch((error) => {;
             setError(error.message);
         })
         .finally(()=>setIsLoading(false));
     }
     
-    const SignUp = (email, password) =>{
+    const SignUp = (email, password, name, history) =>{
         setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            // ...
+            const newUser = {email, displayName: name};
+            setUser(newUser);
+            updateProfile(auth.currentUser, {
+                displayName: name
+              }).then(() => {
+                // Profile updated!
+                // ...
+              }).catch((error) => {
+                // An error occurred
+                // ...
+              });
+              history.replace('/');
         })
         .catch((error) => {
             setError(error.message);

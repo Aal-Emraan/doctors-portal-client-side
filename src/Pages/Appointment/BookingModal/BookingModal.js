@@ -1,6 +1,6 @@
 import { Button, Fade, Modal, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import TextField from '@mui/material/TextField';
 import useAuth from '../../../hooks/useAuth';
@@ -21,9 +21,31 @@ const style = {
 const BookingModal = ({open, handleClose, name, time, date}) => {
 
     const {user} = useAuth();
+    const initialInfo = {name: user.displayName, email: user.email, phone: '', time: time, date: date.toLocaleDateString()};
+    const [bookingInfo, setBookingInfo] = useState(initialInfo);
+
+    const handleOnBlur = e => {
+      const field = e.target.name;
+      const value = e.target.value;
+      const newInfo = {...bookingInfo};
+      newInfo[field] = value;
+      setBookingInfo(newInfo);
+    }
 
     const handleSubmit = e => {
-        alert('submittin')
+        // alert('submitting')
+        // console.log(bookingInfo);
+        fetch('http://localhost:5000/appointments', {
+          method: 'POST',
+          headers: {
+            'content-type':'application/json'
+          },
+          body: JSON.stringify(bookingInfo)
+        })
+        .then(res=>res.json())
+        .then(data => {
+          alert('appointment sumbitted');
+          console.log(data)})
         handleClose();
         e.preventDefault();
     }
@@ -56,6 +78,8 @@ const BookingModal = ({open, handleClose, name, time, date}) => {
                 sx={{width: '90%', m:1}}
                 id="outlined-size-small"
                 placeholder="your name"
+                name="patientName"
+                onBlur={handleOnBlur}
                 defaultValue={user.displayName}
                 size="small"
                 />
@@ -63,6 +87,8 @@ const BookingModal = ({open, handleClose, name, time, date}) => {
                 sx={{width: '90%', m:1}}
                 id="outlined-size-small"
                 type="email"
+                name="email"
+                onBlur={handleOnBlur}
                 defaultValue={user.email}
                 placeholder="your email"
                 size="small"
@@ -71,6 +97,8 @@ const BookingModal = ({open, handleClose, name, time, date}) => {
                 sx={{width: '90%', m:1}}
                 id="outlined-size-small"
                 type="number"
+                name="phone"
+                onBlur={handleOnBlur}
                 placeholder="your phone number"
                 size="small"
                 />

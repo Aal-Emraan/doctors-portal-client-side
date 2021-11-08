@@ -7,7 +7,7 @@ import loginphoto from '../../images/login.png'
 const Login = () => {
 
     const [loginInfo, setLoginInfo] = useState({});
-    const {login} = useAuth();
+    const {login, signInWithGoogle} = useAuth();
     const history = useHistory();
     const location = useLocation();
 
@@ -59,6 +59,7 @@ const Login = () => {
                             <Button>New user? Please sign up</Button>
                         </NavLink>
                     </form>
+                    <Button onClick={() => signInWithGoogle(location, history)} variant="contained">Google Sign In</Button>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <img style={{width: '70%'}} src={loginphoto} alt="" />

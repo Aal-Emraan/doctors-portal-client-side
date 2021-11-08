@@ -1,12 +1,13 @@
 import { Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import login from '../../images/login.png'
 
 const SignUp = () => {
     const [signUpInfo, setSignUpInfo] = useState({});
     const {SignUp, isLoading} = useAuth();
+    const history = useHistory();
 
     const handleOnChange = e =>{
         const field = e.target.name;
@@ -24,7 +25,7 @@ const SignUp = () => {
             e.preventDefault();
             return;
         }
-        SignUp(signUpInfo.email, signUpInfo.password)
+        SignUp(signUpInfo.email, signUpInfo.password, signUpInfo.displayName, history)
         alert('Account Created Succesfully')
         e.preventDefault();
     }

@@ -46,7 +46,7 @@ const AvailableAppointments = ({date}) => {
         <Container>
             <Typography variant="h4" sx={{ color: 'primary.main' }}>Available Appointments {date.toDateString()}</Typography>
             <Grid container spacing={2} sx={{py:5}}>
-                {data.map(item => <Booking booking={item} key={data.id} date={date}></Booking>)}
+                {data.map(item => <Booking booking={item} key={item.id} date={date}></Booking>)}
             </Grid>
         </Container>
     );

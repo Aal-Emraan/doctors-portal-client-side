@@ -30,8 +30,11 @@ const NavBar = () => {
             <Link to="/">Home</Link>
             <Link to="/appointment">Make Appointment</Link>
             {
-                user?.email ? 
+                user?.email ?
+                <>
+                <Link to="/dashboard">Dashboard</Link>
                 <Button onClick={logout} color="inherit">Logout</Button>
+                </>
                 :
                 <Link to="/login"><Button color="inherit">Login</Button></Link>
             }
