@@ -26,7 +26,7 @@ const NavBar = () => {
                 Doctors Portal
             </Typography>
             <Link to="/appointment">Make Appointment</Link>
-            <Button color="inherit">Login</Button>
+            <Link to="/login"><Button color="inherit">Login</Button></Link>
             </Toolbar>
         </AppBar>
         </Box>
