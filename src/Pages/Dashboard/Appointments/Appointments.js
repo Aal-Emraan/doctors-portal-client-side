@@ -1,4 +1,4 @@
-import { List, Typography } from '@mui/material';
+import {  Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
@@ -10,15 +10,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-const Appointments = () => {
+const Appointments = ({date}) => {
     const {user} = useAuth();
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/appointments?email=${user.email}`)
+        fetch(`http://localhost:5000/appointments?email=${user.email}&date=${date}`)
         .then(res => res.json())
         .then(data => setAppointments(data))
-    }, [])
+    }, [date])
     return (
         <Box>
             <Typography variant="h5">

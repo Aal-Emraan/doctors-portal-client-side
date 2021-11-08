@@ -18,6 +18,8 @@ const useFirebase = () => {
         const googleProvider = new GoogleAuthProvider();
         signInWithPopup(auth, googleProvider)
         .then((result) => {
+            const user = result.user;
+            saveUser(user.email, user.displayName, 'PUT')
             // setUser(result.user);
             history.push(location?.state?.from)
         }).catch((error) => {;
@@ -32,6 +34,7 @@ const useFirebase = () => {
         .then((userCredential) => {
             const newUser = {email, displayName: name};
             setUser(newUser);
+            saveUser(email, name, 'POST');
             updateProfile(auth.currentUser, {
                 displayName: name
               }).then(() => {
@@ -83,6 +86,19 @@ const useFirebase = () => {
           });
           return () => unsubscribed;
     }, [])
+
+    const saveUser = (email, displayName, method) => {
+        const newUser = {email, displayName};
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(newUser)
+        })
+        .then()
+
+    }
 
     return {
         user,
