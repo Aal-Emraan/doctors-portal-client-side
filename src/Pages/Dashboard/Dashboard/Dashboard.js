@@ -15,16 +15,26 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Grid } from '@mui/material';
-import Calender from '../../Shared/Calender/Calender'
-import Appointments from '../Appointments/Appointments';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams,
+    useRouteMatch
+  } from "react-router-dom";
+import { Button } from '@mui/material';
+import DeshboardHome from '../DashboardHome/DeshboardHome';
+import MakeAdmin from '../MakeAdmin/MakeAdmin';
+import AddDoctor from '../AddDoctor/AddDoctor';
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [date, setDate] = React.useState(new Date());
+
+  let { path, url } = useRouteMatch();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -34,6 +44,10 @@ function Dashboard(props) {
     <div>
       <Toolbar />
       <Divider />
+      <Link to="/appointment"><Button variant="inherit">Appointment</Button></Link>
+      <Link to={`${url}`}><Button variant="inherit">Dashboard</Button></Link>
+      <Link to={`${url}/makeadmin`}><Button variant="inherit">Make Admin</Button></Link>
+      <Link to={`${url}/adddoctor`}><Button variant="inherit">Add Doctor</Button></Link>
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>
@@ -112,17 +126,17 @@ function Dashboard(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <Grid container spacing={2}>
-            <Grid item xs={12} md={5}>
-                <Calender
-                    date={date}
-                    setDate={setDate}
-                ></Calender>
-            </Grid>
-            <Grid item xs={12} md={7}>
-                <Appointments date={date}></Appointments>
-            </Grid>
-        </Grid>
+        <Switch>
+        <Route exact path={path}>
+            <DeshboardHome></DeshboardHome>
+        </Route>
+        <Route path={`${path}/makeadmin`}>
+            <MakeAdmin></MakeAdmin>
+        </Route>
+        <Route path={`${path}/adddoctor`}>
+            <AddDoctor></AddDoctor>
+        </Route>
+      </Switch>
       </Box>
     </Box>
   );
