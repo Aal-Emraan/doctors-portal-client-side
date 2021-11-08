@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import TextField from '@mui/material/TextField';
+import useAuth from '../../../hooks/useAuth';
 
 const style = {
     background: 'white',
@@ -18,6 +19,8 @@ const style = {
   };
 
 const BookingModal = ({open, handleClose, name, time, date}) => {
+
+    const {user} = useAuth();
 
     const handleSubmit = e => {
         alert('submittin')
@@ -53,12 +56,14 @@ const BookingModal = ({open, handleClose, name, time, date}) => {
                 sx={{width: '90%', m:1}}
                 id="outlined-size-small"
                 placeholder="your name"
+                defaultValue={user.displayName}
                 size="small"
                 />
                 <TextField
                 sx={{width: '90%', m:1}}
                 id="outlined-size-small"
                 type="email"
+                defaultValue={user.email}
                 placeholder="your email"
                 size="small"
                 />

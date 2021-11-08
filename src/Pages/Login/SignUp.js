@@ -1,17 +1,19 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, CircularProgress, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import login from '../../images/login.png'
 
 const SignUp = () => {
-    const [signUpInfo, setSignUpLoginInfo] = useState({});
+    const [signUpInfo, setSignUpInfo] = useState({});
+    const {SignUp, isLoading} = useAuth();
 
     const handleOnChange = e =>{
         const field = e.target.name;
         const value = e.target.value;
         const newInfo = {...signUpInfo};
         newInfo[field] = value;
-        setSignUpLoginInfo(newInfo);
+        setSignUpInfo(newInfo);
     }
 
     console.log(signUpInfo);
@@ -22,12 +24,13 @@ const SignUp = () => {
             e.preventDefault();
             return;
         }
+        SignUp(signUpInfo.email, signUpInfo.password)
         alert('Account Created Succesfully')
         e.preventDefault();
     }
     return (
         <Container>
-            <Grid container spacing={2} sx={{my:5}}>
+            {!isLoading && <Grid container spacing={2} sx={{my:5}}>
                 <Grid item xs={12} md={6} sx={{mt:5}}>
                     <Typography variant="h6">Sign Up</Typography>
                     <form onSubmit={handleSubmit}>
@@ -76,7 +79,8 @@ const SignUp = () => {
                 <Grid item xs={12} md={6}>
                     <img style={{width: '80%'}} src={login} alt="" />
                 </Grid>
-            </Grid>
+            </Grid>}
+            {isLoading && <CircularProgress />}
         </Container>
     )
 };
