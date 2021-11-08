@@ -3,16 +3,15 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import login from '../../images/login.png'
 
-const Login = () => {
-
-    const [loginInfo, setLoginInfo] = useState({});
+const SignUp = () => {
+    const [signUpInfo, setSignUpLoginInfo] = useState({});
 
     const handleOnChange = e =>{
         const field = e.target.name;
         const value = e.target.value;
-        const newInfo = {...loginInfo};
+        const newInfo = {...signUpInfo};
         newInfo[field] = value;
-        setLoginInfo(newInfo);
+        setSignUpLoginInfo(newInfo);
     }
 
     const handleSubmit = e => {
@@ -21,9 +20,15 @@ const Login = () => {
     return (
         <Container>
             <Grid container spacing={2} sx={{my:5}}>
-                <Grid item xs={12} md={6} sx={{mt:15}}>
-                    <Typography variant="h6">Login</Typography>
+                <Grid item xs={12} md={6} sx={{mt:5}}>
+                    <Typography variant="h6">Sign Up</Typography>
                     <form onSubmit={handleSubmit}>
+                        <TextField
+                        sx={{width: '70%', m:2}}
+                        name="displayName"
+                        onBlur={handleOnChange}
+                        label="Name"
+                        variant="standard" />
                         <TextField
                         sx={{width: '70%', m:2}}
                         type="email"
@@ -47,17 +52,17 @@ const Login = () => {
                             Login
                         </Button>
 
-                        <NavLink style={{textDecoration: 'none'}} to="/signup">
-                            <Button>New user? Please sign up</Button>
+                        <NavLink style={{textDecoration: 'none'}} to="/login">
+                            <Button sx={{mt:5}}>Already have account? Please Login</Button>
                         </NavLink>
                     </form>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <img style={{width: '70%'}} src={login} alt="" />
+                    <img style={{width: '80%'}} src={login} alt="" />
                 </Grid>
             </Grid>
         </Container>
-    );
+    )
 };
 
-export default Login;
+export default SignUp;
