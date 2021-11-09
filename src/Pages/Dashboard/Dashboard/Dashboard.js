@@ -26,20 +26,15 @@ import DeshboardHome from '../DashboardHome/DeshboardHome';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AddDoctor from '../AddDoctor/AddDoctor';
 import useAuth from '../../../hooks/useAuth';
+import AdminRoute from '../../../AdminRoute/AdminRoute';
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const {user} = useAuth();
-  const [isAdmin, setIsAdmin] = React.useState(false);
+  const {isAdmin} = useAuth();
 
-  React.useEffect(() => {
-    fetch(`http://localhost:5000/users?email=${user.email}`)
-    .then(res => res.json())
-    .then(data => setIsAdmin(data.admin))
-  }, [])
 
   let { path, url } = useRouteMatch();
 
@@ -141,12 +136,12 @@ function Dashboard(props) {
         <Route exact path={path}>
             <DeshboardHome></DeshboardHome>
         </Route>
-        <Route path={`${path}/makeadmin`}>
+        <AdminRoute path={`${path}/makeadmin`}>
             <MakeAdmin></MakeAdmin>
-        </Route>
-        <Route path={`${path}/adddoctor`}>
+        </AdminRoute>
+        <AdminRoute path={`${path}/adddoctor`}>
             <AddDoctor></AddDoctor>
-        </Route>
+        </AdminRoute>
       </Switch>
       </Box>
     </Box>

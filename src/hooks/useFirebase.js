@@ -10,6 +10,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const auth = getAuth();
 
@@ -85,7 +86,7 @@ const useFirebase = () => {
             setIsLoading(false);
           });
           return () => unsubscribed;
-    }, [])
+    }, [auth])
 
     const saveUser = (email, displayName, method) => {
         const newUser = {email, displayName};
@@ -100,10 +101,17 @@ const useFirebase = () => {
 
     }
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/users?email=${user?.email}`)
+        .then(res => res.json())
+        .then(data => setIsAdmin(data.admin))
+      }, [user])
+
     return {
         user,
         error,
         isLoading,
+        isAdmin,
         signInWithGoogle,
         SignUp,
         login,
