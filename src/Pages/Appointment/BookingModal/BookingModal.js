@@ -18,7 +18,7 @@ const style = {
     p: 4,
   };
 
-const BookingModal = ({open, handleClose, name, time, date}) => {
+const BookingModal = ({open, handleClose, name, time, date, appoinmentName, price}) => {
 
     const {user} = useAuth();
     const initialInfo = {name: user.displayName, email: user.email, phone: '', time: time};
@@ -33,7 +33,7 @@ const BookingModal = ({open, handleClose, name, time, date}) => {
     }
 
     const handleSubmit = e => {
-      const newBookingInfo = {...bookingInfo, date: date.toLocaleDateString()};
+      const newBookingInfo = {...bookingInfo, date: date.toLocaleDateString(), appoinmentName, status: 'Pending', price};
         // alert('submitting')
         // console.log(bookingInfo);
         fetch('http://localhost:5000/appointments', {
