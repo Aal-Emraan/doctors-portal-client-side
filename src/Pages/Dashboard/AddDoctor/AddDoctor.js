@@ -20,7 +20,9 @@ const AddDoctor = () => {
 		})
 			.then((response) => response.json())
 			.then((result) => {
-				console.log("Success:", result);
+				if (result.insertedId) {
+					alert("doctor added succesfully.");
+				}
 			})
 			.catch((error) => {
 				console.error("Error:", error);
