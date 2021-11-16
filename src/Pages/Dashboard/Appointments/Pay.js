@@ -21,9 +21,11 @@ const Pay = () => {
 	return (
 		<div>
 			<h2>Pay your bill for {appointment?.price}</h2>
-			<Elements stripe={stripePromise}>
-				<CheckoutForm appointment={appointment} />
-			</Elements>
+			{appointment.price && (
+				<Elements stripe={stripePromise}>
+					<CheckoutForm appointment={appointment} />
+				</Elements>
+			)}
 		</div>
 	);
 };
