@@ -15,10 +15,10 @@ const Appointments = ({date}) => {
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/appointments?email=${user.email}&date=${date}`)
+        fetch(`http://localhost:5000/appointments?email=${user.email}&date=${date.toLocaleDateString()}`)
         .then(res => res.json())
         .then(data => setAppointments(data))
-    }, [date])
+    }, [user.email, date])
     return (
         <Box>
             <Typography variant="h5">

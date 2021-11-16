@@ -21,8 +21,8 @@ const style = {
 const BookingModal = ({open, handleClose, name, time, date}) => {
 
     const {user} = useAuth();
-    const initialInfo = {name: user.displayName, email: user.email, phone: '', time: time, date: date.toLocaleDateString()};
-    const [bookingInfo, setBookingInfo] = useState(initialInfo);
+    const initialInfo = {name: user.displayName, email: user.email, phone: '', time: time};
+    const [bookingInfo, setBookingInfo] = useState({...initialInfo});
 
     const handleOnBlur = e => {
       const field = e.target.name;
@@ -33,6 +33,7 @@ const BookingModal = ({open, handleClose, name, time, date}) => {
     }
 
     const handleSubmit = e => {
+      const newBookingInfo = {...bookingInfo, date: date.toLocaleDateString()};
         // alert('submitting')
         // console.log(bookingInfo);
         fetch('http://localhost:5000/appointments', {
@@ -40,7 +41,7 @@ const BookingModal = ({open, handleClose, name, time, date}) => {
           headers: {
             'content-type':'application/json'
           },
-          body: JSON.stringify(bookingInfo)
+          body: JSON.stringify(newBookingInfo)
         })
         .then(res=>res.json())
         .then(data => {
