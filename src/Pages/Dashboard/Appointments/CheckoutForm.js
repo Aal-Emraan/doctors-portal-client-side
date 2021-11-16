@@ -12,13 +12,16 @@ const CheckoutForm = ({ appointment }) => {
 	const [cilentSecretInfo, setClientSecretInfo] = useState("");
 
 	useEffect(() => {
-		fetch("http://localhost:5000/create-payment-intent", {
-			method: "POST",
-			headers: {
-				"content-type": "application/json",
-			},
-			body: JSON.stringify({ price: appointment.price }),
-		})
+		fetch(
+			"https://secure-shore-77601.herokuapp.com/create-payment-intent",
+			{
+				method: "POST",
+				headers: {
+					"content-type": "application/json",
+				},
+				body: JSON.stringify({ price: appointment.price }),
+			}
+		)
 			.then((res) => res.json())
 			.then((data) => setClientSecretInfo(data.clientSecret));
 	}, [appointment.price]);
@@ -79,7 +82,7 @@ const CheckoutForm = ({ appointment }) => {
 				last4: paymentMethod.card.last4,
 			};
 
-			const uri = `http://localhost:5000/appointment/${appointment._id}`;
+			const uri = `https://secure-shore-77601.herokuapp.com/appointment/${appointment._id}`;
 			fetch(uri, {
 				method: "PUT",
 				headers: {

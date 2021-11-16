@@ -17,7 +17,7 @@ const Appointments = ({ date }) => {
 
 	useEffect(() => {
 		fetch(
-			`http://localhost:5000/appointments?email=${
+			`https://secure-shore-77601.herokuapp.com/appointments?email=${
 				user.email
 			}&date=${date.toLocaleDateString()}`
 		)

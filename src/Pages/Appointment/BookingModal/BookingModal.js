@@ -53,7 +53,7 @@ const BookingModal = ({
 		};
 		// alert('submitting')
 		// console.log(bookingInfo);
-		fetch("http://localhost:5000/appointments", {
+		fetch("https://secure-shore-77601.herokuapp.com/appointments", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
